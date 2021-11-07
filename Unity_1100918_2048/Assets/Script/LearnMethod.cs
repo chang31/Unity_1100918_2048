@@ -4,7 +4,7 @@ using UnityEngine;
 /// summary 摘要
 /// 資料說明，顯示在 vs 編譯器提示上
 /// </summary>
-public class LearmMethod : MonoBehaviour
+public class LearnMethod : MonoBehaviour
 {
     // 方法 Method Function (函式)   
     // 作用: 執行較複雜的程式內容

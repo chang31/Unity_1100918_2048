@@ -3,6 +3,7 @@ using UnityEngine;
 public class LearnIf : MonoBehaviour
 {
     public bool openDoor;
+    public int score = 99;
 
     private void Start()
     {
@@ -27,6 +28,27 @@ public class LearnIf : MonoBehaviour
         {
                 print("闽");
         }
+        }
+    }
+
+    private void Update()
+    {
+        // 狦だ计 >= 60だ の
+        if (score >= 60)
+        {
+            print("の");
+        }
+        // 狦だ计 >= 40だ 干σ
+        // 粂猭: else if (ガ狶) (ガ狶  true 磅︽)
+        // else if  if よ籔 else よ 礚
+        else if (score >= 40)
+        {
+            print("干σ");
+        }
+        // 狦だ计 < 40だ 讽
+        else
+        {
+            print("讽");
         }
     }
 }

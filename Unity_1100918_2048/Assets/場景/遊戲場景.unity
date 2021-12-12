@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 257438182}
   - component: {fileID: 257438184}
   - component: {fileID: 257438185}
+  - component: {fileID: 257438186}
   m_Layer: 0
   m_Name: "\u963F\u5BF6"
   m_TagString: Untagged
@@ -964,8 +965,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f32313c0ccf5042a50a1a559353b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 10
+  attack: 50
   goTarget: {fileID: 1595660301}
+  textAttack: {fileID: 1121364717}
+  delayAttack: 3.5
+  delaySendDamage: 0.5
+  parameterAttack: "\u653B\u64CA\u89F8\u767C"
+  onAttackFinish:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &257438186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257438180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0ca8ad9698e9a4a896f100e9a01bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  textHp: {fileID: 1831521537}
+  imgHp: {fileID: 1522723771}
+  tagDamageObject: 
+  parameterDamage: "\u53D7\u50B7\u89F8\u767C"
+  parameterDead: "\u6B7B\u4EA1\u89F8\u767C"
 --- !u!1001 &314718925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1597,7 +1623,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  direction: 0
+  direction: 4
+  stateTurm: 0
+  onEnemyTurn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1595660308}
+        m_TargetAssemblyTypeName: AttackSystem, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &490229866 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8201086219872712917, guid: 407b59b9b27b76d44ac2283ab24853a8, type: 3}
@@ -2502,7 +2544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804885747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.07, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1595660303}
@@ -5265,6 +5307,10 @@ GameObject:
   - component: {fileID: 1595660303}
   - component: {fileID: 1595660302}
   - component: {fileID: 1595660304}
+  - component: {fileID: 1595660308}
+  - component: {fileID: 1595660307}
+  - component: {fileID: 1595660306}
+  - component: {fileID: 1595660305}
   m_Layer: 0
   m_Name: "\u53E4\u98DB"
   m_TagString: Untagged
@@ -5331,7 +5377,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595660301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.2480783, y: 2.078546, z: 0}
+  m_LocalPosition: {x: 4.35, y: 2.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 804885748}
@@ -5357,6 +5403,94 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &1595660305
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595660301}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.100000024, y: 0.018367171}
+  m_Size: {x: 1, y: 2.285619}
+  m_Direction: 0
+--- !u!50 &1595660306
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595660301}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1595660307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595660301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0ca8ad9698e9a4a896f100e9a01bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  textHp: {fileID: 1854372282}
+  imgHp: {fileID: 246045968}
+  tagDamageObject: "\u62F3\u982D"
+  parameterDamage: "\u53D7\u50B7\u89F8\u767C"
+  parameterDead: "\u6B7B\u4EA1\u89F8\u767C"
+--- !u!114 &1595660308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595660301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f32313c0ccf5042a50a1a559353b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: 33
+  goTarget: {fileID: 257438180}
+  textAttack: {fileID: 931656150}
+  delayAttack: 3.5
+  delaySendDamage: 0.5
+  parameterAttack: "\u653B\u64CA\u89F8\u767C"
+  onAttackFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 463341724}
+        m_TargetAssemblyTypeName: System2048, Assembly-CSharp
+        m_MethodName: ChangeToMyTurn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1606763342 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8201086219872712917, guid: 407b59b9b27b76d44ac2283ab24853a8, type: 3}
@@ -6032,6 +6166,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 10
   goTarget: {fileID: 1595660301}
+  textAttack: {fileID: 0}
+  delayAttack: 3.5
+  delaySendDamage: 0.5
+  parameterAttack: "\u653B\u64CA\u89F8\u767C"
+  onAttackFinish:
+    m_PersistentCalls:
+      m_Calls: []
   positionSpawn: {fileID: 1909378650}
   goAttackParticle: {fileID: 5184820361997282914, guid: 5e7751139b39e0c46b43d35691c6456a, type: 3}
   speed: 764

@@ -18,7 +18,7 @@ public class AttackSystemFar : AttackSystem
     // override 複寫: 複寫父類別 virtual 成員
     public override void Attack()
     {
-        base.Attack();
+        // base.Attack();  // base 基底:父類別的內容
 
         print("遠距攻擊");
 
@@ -29,6 +29,7 @@ public class AttackSystemFar : AttackSystem
         GameObject tempAttack = Instantiate(goAttackParticle, positionSpawn.position, Quaternion.identity);
         tempAttack.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0));
 
+        tempAttack.AddComponent<Bullet>().attack = attack;
     }
 
 }

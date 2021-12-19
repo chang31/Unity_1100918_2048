@@ -16,11 +16,11 @@ public class AttackSystemFar : AttackSystem
     [Header("粒子發射速度"), Range(0, 1500)]
     public float speed = 500;
     // override 複寫: 複寫父類別 virtual 成員
-    public override void Attack()
+    public override void Attack(float increase = 0)
     {
         // base.Attack();  // base 基底:父類別的內容
 
-        print("遠距攻擊");
+        onAttackFinish.Invoke();
 
         // 生成(物件 物件 角度 )
         // 生成的物件名稱後方會有(Clone)
@@ -29,7 +29,9 @@ public class AttackSystemFar : AttackSystem
         GameObject tempAttack = Instantiate(goAttackParticle, positionSpawn.position, Quaternion.identity);
         tempAttack.GetComponent<Rigidbody2D>().AddForce(new Vector2(speed, 0));
 
-        tempAttack.AddComponent<Bullet>().attack = attack;
+        tempAttack.AddComponent<Bullet>().attack = attack + increase;
+
+        print("本次攻擊力:" + (attack + increase)); 
     }
 
 }

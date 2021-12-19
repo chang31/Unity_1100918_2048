@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class HealthSystem : MonoBehaviour
 {
-    [Header("血量"), Range(0, 500)]
+    [Header("血量"), Range(0, 100000)]
     public float hp = 100;
     [Header("要控制的血量與血條")]
     public Text textHp;
@@ -17,6 +18,8 @@ public class HealthSystem : MonoBehaviour
     [Header("動畫參數")]
     public string parameterDamage = "受傷觸發";
     public string parameterDead = "死亡觸發";
+    [Header("死亡事件")]
+    public UnityEvent onDead;
 
 
     private float hpMax;
@@ -67,6 +70,7 @@ public class HealthSystem : MonoBehaviour
     /// </summary>
     private void Dead()
     {
+        onDead.Invoke();
         ani.SetTrigger(parameterDead);
     }
 }

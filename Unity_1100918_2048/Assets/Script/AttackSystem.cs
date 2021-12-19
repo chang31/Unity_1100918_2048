@@ -37,20 +37,37 @@ public class AttackSystem : MonoBehaviour
     private void Awake()
     {
         textAttack.text = "Atk" + attack;
+        ani = GetComponent<Animator>();
         targetHealthSystem = goTarget.GetComponent<HealthSystem>();
     }
     #endregion
 
+    [Header("攻擊開始事件")]
+    public UnityEvent onAttackStart;
     [Header("攻擊完成事件")]
     public UnityEvent onAttackFinish;
+    private bool isStop;
+
+
+    /// <summary>
+    /// 停止攻擊
+    /// </summary>
+    public void StopAttack()
+    {
+        isStop = true;          // 已經停止
+        StopAllCoroutines();    // 停止所有協程
+        enabled = false;        // 關閉腳本
+    }
 
     #region 方法：公開
     // virtual 虛擬:允許子類別複寫
     /// <summary>
     /// 攻擊方法
     /// </summary>
-    public virtual void Attack()
+    public virtual void Attack(float increase =0)
     {
+        if (isStop) return;     // 如果停止就跳出
+
         // 啟動 協同程序
         StartCoroutine(DelayAttack());
     }
@@ -59,10 +76,15 @@ public class AttackSystem : MonoBehaviour
     {
         // 延遲3.5秒 
         yield return new WaitForSeconds(delayAttack);
+
         // 攻擊動畫
         ani.SetTrigger(parameterAttack);
+
         // 延遲 0.5秒
         yield return new WaitForSeconds(delaySendDamage);
+
+        onAttackFinish.Invoke();
+
         // 傳送傷害
         targetHealthSystem.Hurt(attack);
         onAttackFinish.Invoke();
